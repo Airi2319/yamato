@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餌やり履歴アプリ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        .history {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .history div {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>餌やり履歴アプリ</h1>
+
+    <div class="button-container">
+        <button id="btn-7">7時</button>
+        <button id="btn-8">8時</button>
+        <button id="btn-10">10時</button>
+        <button id="btn-12">12時</button>
+        <button id="btn-14">14時</button>
+        <button id="btn-clear" style="background-color: #f44336;">履歴消去</button>
+    </div>
+
+    <div class="history" id="history"></div>
+
+    <script>
+        // 餌やり記録を追加する関数
+        function addRecord(time) {
+            const historyDiv = document.getElementById('history');
+            const now = new Date();
+            const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ` +
+                              `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+            const record = `${time}に餌をあげました (${timestamp})`;
+            const recordElement = document.createElement('div');
+            recordElement.textContent = record;
+            historyDiv.appendChild(recordElement);
+        }
+
+        // 履歴を消去する関数
+        function clearHistory() {
+            const historyDiv = document.getElementById('history');
+            historyDiv.innerHTML = '';
+        }
+
+        // ボタンのクリックイベントを設定
+        document.getElementById('btn-7').addEventListener('click', () => addRecord('7時'));
+        document.getElementById('btn-8').addEventListener('click', () => addRecord('8時'));
+        document.getElementById('btn-10').addEventListener('click', () => addRecord('10時'));
+        document.getElementById('btn-12').addEventListener('click', () => addRecord('12時'));
+        document.getElementById('btn-14').addEventListener('click', () => addRecord('14時'));
+        document.getElementById('btn-clear').addEventListener('click', clearHistory);
+    </script>
+</body>
+</html>
